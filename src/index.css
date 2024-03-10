@@ -1,0 +1,23 @@
+html, body{
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+}
+
+body{
+    background-color: black;
+}
+
+.background-handler-div{
+    height: 100%;
+    width: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    background-color: transparent;
+
+    /* cursor: none; */
+}
