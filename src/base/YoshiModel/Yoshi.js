@@ -25,7 +25,7 @@ export default function Yoshi(){
         yoshiOpacity = map(yoshiOpacity, 0, 2500, 1, 0);
         console.log(yoshiOpacity)
 
-        document.getElementById("yoshi").style.opacity = yoshiOpacity - 0.8;
+        document.getElementById("yoshi").style.opacity = yoshiOpacity - 0.9;
     }
 
     window.onresize = () =>{
