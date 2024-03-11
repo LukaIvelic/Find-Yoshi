@@ -22,7 +22,14 @@ export default function Yoshi(){
         yoshiOpacity = map(yoshiOpacity, 0, 2500, 1, 0);
         console.log(yoshiOpacity)
 
-        document.getElementById("yoshi").style.opacity = yoshiOpacity - 0.9;
+        document.getElementById("yoshi").style.opacity = yoshiOpacity - 0.8;
+    }
+
+    window.onresize = () =>{
+        randomX = Math.random() * window.innerWidth + 10;
+        randomY = Math.random() * window.innerHeight + 10;
+        document.getElementById("yoshi").style.top = randomY + "px";
+        document.getElementById("yoshi").style.left = randomX + "px";
     }
 
     const yoshi = <>

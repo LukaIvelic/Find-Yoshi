@@ -25,8 +25,17 @@ export default function BackgroundHandler() {
     
     const light = new THREE.PointLight(0xffffff, 0.2, 100, 0.05);
     scene.add(light);
-    function recapture(mouse){
-        light.position.set(mouse.clientX - window.innerWidth / 2, -mouse.clientY + window.innerHeight / 2, 0);
+    function recapture(event){
+        event.preventDefault();
+        var x = (event.clientX / window.innerWidth) * 2 - 1;
+        var y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        let vector = new THREE.Vector3(x, y, 0.5);
+        vector.unproject(camera);
+        let dir = vector.sub(camera.position).normalize();
+        let distance = -camera.position.z / dir.z;
+        let pos = camera.position.clone().add(dir.multiplyScalar(distance));
+        light.position.copy(pos);
         renderer.render(scene, camera);
     }
 
