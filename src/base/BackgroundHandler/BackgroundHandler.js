@@ -8,7 +8,6 @@ export default function BackgroundHandler() {
     renderer.domElement.style.position = "absolute";
     renderer.domElement.style.left = "0";
     renderer.domElement.style.top = "0";
-    renderer.domElement.style.zIndex = "-1";
     document.body.appendChild(renderer.domElement);
 
     const scene = new THREE.Scene();
@@ -17,13 +16,8 @@ export default function BackgroundHandler() {
     camera.position.set(0, 0, 800);
     camera.lookAt(new THREE.Vector3(0, 0, 0))
 
-    var material = new THREE.MeshToonMaterial({color: 0xffffff});
-    var geometry = new THREE.SphereGeometry(5);
-    var box = new THREE.Mesh(geometry, material);
-    // scene.add(box);
-
-    geometry = new THREE.PlaneGeometry(window.innerWidth, window.innerHeight);
-    material = new THREE.MeshToonMaterial({ color: "0xffffff", side: THREE.DoubleSide });
+    var geometry = new THREE.PlaneGeometry(window.innerWidth * 100, window.innerHeight * 100);
+    var material = new THREE.MeshToonMaterial({ color: "0xffffff", side: THREE.DoubleSide });
     const plane = new THREE.Mesh(geometry, material);
 
     scene.add(plane);
@@ -32,14 +26,23 @@ export default function BackgroundHandler() {
     const light = new THREE.PointLight(0xffffff, 0.2, 100, 0.05);
     scene.add(light);
     function recapture(mouse){
-        light.position.set(mouse.clientX - 1275, -mouse.clientY + 650, 0);
+        light.position.set(mouse.clientX - window.innerWidth / 2, -mouse.clientY + window.innerHeight / 2, 0);
         renderer.render(scene, camera);
     }
 
     renderer.render(scene, camera)
 
+    renderer.domElement.onmousemove = recapture;
+    window.addEventListener('resize', function() {
+    var WIDTH = window.innerWidth,
+      HEIGHT = window.innerHeight;
+    renderer.setSize(WIDTH, HEIGHT);
+    camera.aspect = WIDTH / HEIGHT;
+    camera.updateProjectionMatrix();
+  });
+
     const backgroundHandler = <>
-        <div onMouseMove={recapture} className='background-handler-div'></div>
+        {/* <div onMouseMove={recapture} className='background-handler-div'></div> */}
     </>;
 
     return (backgroundHandler);

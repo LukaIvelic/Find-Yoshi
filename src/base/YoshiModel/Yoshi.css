@@ -1,0 +1,7 @@
+#yoshi{
+    position: absolute;
+    width: 20px;
+    z-index: 1;
+
+    opacity: 0.1;
+}
