@@ -1,7 +1,10 @@
+import { useState } from 'react';
 import yoshi_image from '../../media/yoshi.png'
 import './Yoshi.css'
 
 export default function Yoshi(){
+
+    var [score, setScore] = useState(0);
 
     var randomX = Math.random() * window.innerWidth + 10;
     var randomY = Math.random() * window.innerHeight + 10;
@@ -36,6 +39,14 @@ export default function Yoshi(){
         <img src={yoshi_image} 
              id='yoshi'
             style={{ top: randomY, left: randomX, opacity: yoshiOpacity }}
+            onClick={()=>{
+                setScore(++score);
+                alert(`${score} Yoshis found! Find him again!`);
+                randomX = Math.random() * window.innerWidth + 10;
+                randomY = Math.random() * window.innerHeight + 10;
+                document.getElementById("yoshi").style.top = randomY + "px";
+                document.getElementById("yoshi").style.left = randomX + "px";
+            }}
         ></img>
     </>;
 
